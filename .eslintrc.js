@@ -1,4 +1,8 @@
 module.exports = {
+  env: {
+    node: true,
+    es2021: true,
+  },
   extends: 'airbnb',
   overrides: [
     {
@@ -8,9 +12,6 @@ module.exports = {
       files: [
         '.eslintrc.{js,cjs}',
       ],
-      parserOptions: {
-        sourceType: 'script',
-      },
     },
   ],
   parserOptions: {
