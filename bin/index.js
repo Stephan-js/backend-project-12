@@ -1,6 +1,7 @@
 import path from 'path';
 import { program } from "commander";
 import Fastify from 'fastify';
+import plugins from '../src/plugin.js';
 
 const port = process.env.PORT || 5001;
 const staticPath = path.join(process.cwd(), 'build');
@@ -23,7 +24,7 @@ const start = async () => {
     const appOptions = {
       staticPath: path.resolve(process.cwd(), options.static),
     };
-    const preparedServer = await plugin(fastify, appOptions);
+    const preparedServer = await plugins(fastify, appOptions);
     await preparedServer.listen({ port: options.port, host: options.address });
   } catch (err) {
     console.error(err);
