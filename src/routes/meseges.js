@@ -8,7 +8,7 @@ const { Unauthorized } = HttpErrors;
 const getNextId = () => _.uniqueId();
 
 export default (app, state) => {
-  app.get('/api/v1/messages', { preValidation: [app.authenticate] }, (req, reply) => {
+  app.get('/api/messages', { preValidation: [app.authenticate] }, (req, reply) => {
     const user = state.users.find(({ id }) => id === req.user.userId);
 
     if (!user) {
@@ -21,7 +21,7 @@ export default (app, state) => {
       .send(state.messages);
   });
 
-  app.post('/api/v1/messages', { preValidation: [app.authenticate] }, async (req, reply) => {
+  app.post('/apis/messages', { preValidation: [app.authenticate] }, async (req, reply) => {
     const message = req.body;
     const messageWithId = {
       ...message,
@@ -36,7 +36,7 @@ export default (app, state) => {
       .send(messageWithId);
   });
 
-  app.patch('/api/v1/messages/:messageId', { preValidation: [app.authenticate] }, async (req, reply) => {
+  app.patch('/api/messages/:messageId', { preValidation: [app.authenticate] }, async (req, reply) => {
     const { messageId } = req.params;
     const { body } = req.body;
     const message = state.messages.find((c) => c.id === messageId);
@@ -52,7 +52,7 @@ export default (app, state) => {
       .send(message);
   });
 
-  app.delete('/api/v1/messages/:messageId', { preValidation: [app.authenticate] }, async (req, reply) => {
+  app.delete('/api/messages/:messageId', { preValidation: [app.authenticate] }, async (req, reply) => {
     const { messageId } = req.params;
     // @ts-ignore
     state.messages = state.messages.filter((m) => m.id !== messageId);

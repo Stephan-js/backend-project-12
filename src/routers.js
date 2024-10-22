@@ -14,8 +14,8 @@ const buildStates = (defaultStates) => {
   const randomChannelId = getId();
   const state = {
     channels: [
-      { id: generalChannelId, name: 'general', removable: false },
-      { id: randomChannelId, name: 'random', removable: false },
+      { id: generalChannelId, name: 'general', removable: false, secret: false },
+      { id: randomChannelId, name: 'random', removable: false, secret: false },
     ],
     messages: [],
     currentChannelId: generalChannelId,
@@ -38,18 +38,18 @@ const buildStates = (defaultStates) => {
   return state;
 };
 
-export default (app, defualtStates = {}) => {
+export default (server, defualtStates = {}) => {
   const state = buildStates(defualtStates);
 
-  app.io.on('connect', (socket) => {
+  server.io.on('connect', (socket) => {
     console.log({ 'socket.id': socket.id });
   });
 
-  initChannelsRoutes(app, state);
-  initMessagesRoutes(app, state);
-  initUsersRoutes(app, state);
+  initChannelsRoutes(server, state);
+  initMessagesRoutes(server, state);
+  initUsersRoutes(server, state);
 
-  app
+  server
     .get('/', (_req, reply) => {
       reply.sendFile('index.html');
     });
