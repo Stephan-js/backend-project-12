@@ -1,6 +1,6 @@
 {
   "name": "chat-app-server",
-  "version": "0.4.3",
+  "version": "0.4.4",
   "description": "",
   "main": "plugin.js",
   "type": "module",
@@ -22,7 +22,5 @@
     "http-errors": "^2.0.0",
     "lodash": "^4.17.21",
     "socket.io": "^4.5.1"
-  },
-  "devDependencies": {
   }
 }
