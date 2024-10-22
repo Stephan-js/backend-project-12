@@ -32,7 +32,7 @@ const setUpAuth = (fastify) => {
     });
 };
 
-export default async (fastify, options = { staticPath: 'build' }) => {
+export default async (fastify, options) => {
   setUpAuth(fastify);
   setUpStaticAss(fastify, options.staticPath);
   await fastify.register(fastifySocketIo);

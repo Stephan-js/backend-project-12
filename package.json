@@ -4,6 +4,9 @@
   "description": "",
   "main": "plugin.js",
   "type": "module",
+  "bin": {
+    "start-server": "./bin/index.js"
+  },
   "scripts": {
     "start": "npx fastify start src/plugin.js -l info -P -a 0.0.0.0 -p 5001"
   },

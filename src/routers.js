@@ -1,6 +1,9 @@
 import _ from 'lodash';
 import HttpErrors from 'http-errors';
 
+import initUsersRoutes from './routes/users.js';
+import initMessagesRoutes from './routes/meseges.js';
+
 const { Unauthorized, Conflict } = HttpErrors;
 
 const buildStates = (defaultStates) => {
@@ -43,8 +46,8 @@ export default (app, defualtStates = {}) => {
   });
 
   // initChannelsRoutes(app, state);
-  // initMessagesRoutes(app, state);
-  // initUsersRoutes(app, state);
+  initMessagesRoutes(app, state);
+  initUsersRoutes(app, state);
 
   app
     .get('/', (_req, reply) => {
