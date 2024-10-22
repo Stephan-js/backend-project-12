@@ -1,8 +1,7 @@
 import _ from 'lodash';
 import HttpErrors from 'http-errors';
-import createError from 'http-errors';
 
-const { Unauthorized } = HttpErrors;
+const { Unauthorized, NotFound } = HttpErrors;
 
 const getNextId = () => _.uniqueId();
 
@@ -40,7 +39,7 @@ export default (app, state) => {
     const { name } = req.body;
     const channel = state.channels.find((c) => c.id === channelId);
     if (!channel) {
-      reply.send(createError(404, 'Sorry, this channel not exist!'));
+      reply.send(new NotFound());
       return;
     }
     channel.name = name;

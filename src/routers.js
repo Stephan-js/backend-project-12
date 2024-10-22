@@ -1,11 +1,8 @@
 import _ from 'lodash';
-import HttpErrors from 'http-errors';
 
 import initUsersRoutes from './routes/users.js';
 import initMessagesRoutes from './routes/meseges.js';
 import initChannelsRoutes from './routes/chanels.js';
-
-const { Unauthorized, Conflict } = HttpErrors;
 
 const getId = () => _.uniqueId();
 
@@ -14,8 +11,12 @@ const buildStates = (defaultStates) => {
   const randomChannelId = getId();
   const state = {
     channels: [
-      { id: generalChannelId, name: 'general', removable: false, secret: false },
-      { id: randomChannelId, name: 'random', removable: false, secret: false },
+      {
+        id: generalChannelId, name: 'general', removable: false, secret: false,
+      },
+      {
+        id: randomChannelId, name: 'random', removable: false, secret: false,
+      },
     ],
     messages: [],
     currentChannelId: generalChannelId,

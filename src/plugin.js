@@ -3,7 +3,7 @@ import fastifyStatic from '@fastify/static';
 import fastifyJWT from '@fastify/jwt';
 import HttpErrors from 'http-errors';
 
-import addRoutes from './routers.js'
+import addRoutes from './routers.js';
 
 const { Unauthorized } = HttpErrors;
 
