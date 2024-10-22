@@ -3,7 +3,7 @@ import HttpErrors from 'http-errors';
 
 const { Unauthorized, Conflict } = HttpErrors;
 
-const getNextId = () => _.uniqueId();
+const getId = () => _.uniqueId();
 
 export default (app, state) => {
   app.post('/api/v1/login', async (req, reply) => {
@@ -30,12 +30,12 @@ export default (app, state) => {
       return;
     }
 
-    const newUser = { id: getNextId(), username, password };
+    const newUser = { id: getId(), username, password };
     const token = app.jwt.sign({ userId: newUser.id });
     state.users.push(newUser);
     reply
       .code(201)
       .header('Content-Type', 'application/json; charset=utf-8')
-      .send({ token, username });
+      .send({ token });
   });
 };

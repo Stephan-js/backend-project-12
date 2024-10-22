@@ -3,12 +3,15 @@ import HttpErrors from 'http-errors';
 
 import initUsersRoutes from './routes/users.js';
 import initMessagesRoutes from './routes/meseges.js';
+import initChannelsRoutes from './routes/chanels.js';
 
 const { Unauthorized, Conflict } = HttpErrors;
 
+const getId = () => _.uniqueId();
+
 const buildStates = (defaultStates) => {
-  const generalChannelId = _.uniqueId();
-  const randomChannelId = _.uniqueId();
+  const generalChannelId = getId();
+  const randomChannelId = getId();
   const state = {
     channels: [
       { id: generalChannelId, name: 'general', removable: false },
@@ -16,13 +19,10 @@ const buildStates = (defaultStates) => {
     ],
     messages: [],
     currentChannelId: generalChannelId,
-    users: [
-      { id: 1, username: 'admin', password: 'admin' },
-    ],
+    users: [],
   };
 
   if (defaultStates.messages) {
-    // @ts-ignore
     state.messages.push(...defaultStates.messages);
   }
   if (defaultStates.channels) {
@@ -45,7 +45,7 @@ export default (app, defualtStates = {}) => {
     console.log({ 'socket.id': socket.id });
   });
 
-  // initChannelsRoutes(app, state);
+  initChannelsRoutes(app, state);
   initMessagesRoutes(app, state);
   initUsersRoutes(app, state);
 
