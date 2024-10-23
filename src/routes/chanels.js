@@ -5,6 +5,7 @@ const { Unauthorized, NotFound } = HttpErrors;
 
 const getNextId = () => _.uniqueId();
 
+
 export default (app, state) => {
   app.get('/api/channels', { preValidation: [app.authenticate] }, (req, reply) => {
     const user = state.users.find(({ id }) => id === req.user.userId);

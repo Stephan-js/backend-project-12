@@ -1,9 +1,7 @@
-// @ts-check
-
 import _ from 'lodash';
 import HttpErrors from 'http-errors';
 
-const { Unauthorized } = HttpErrors;
+const { Unauthorized, NotFound } = HttpErrors;
 
 const getNextId = () => _.uniqueId();
 
@@ -21,7 +19,7 @@ export default (app, state) => {
       .send(state.messages);
   });
 
-  app.post('/apis/messages', { preValidation: [app.authenticate] }, async (req, reply) => {
+  app.post('/api/messages', { preValidation: [app.authenticate] }, async (req, reply) => {
     const message = req.body;
     const messageWithId = {
       ...message,
@@ -41,7 +39,7 @@ export default (app, state) => {
     const { body } = req.body;
     const message = state.messages.find((c) => c.id === messageId);
     if (!message) {
-      reply.code(404);
+      reply.send(new NotFound());
       return;
     }
     message.body = body;
@@ -54,7 +52,6 @@ export default (app, state) => {
 
   app.delete('/api/messages/:messageId', { preValidation: [app.authenticate] }, async (req, reply) => {
     const { messageId } = req.params;
-    // @ts-ignore
     state.messages = state.messages.filter((m) => m.id !== messageId);
     const data = { id: messageId };
 

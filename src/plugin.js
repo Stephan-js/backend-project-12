@@ -18,7 +18,6 @@ const setUpStaticAss = (server, buildPath) => {
 };
 
 const setUpAuth = (server) => {
-  // TODO add socket auth
   server
     .register(fastifyJWT, {
       secret: 'supersecret',
