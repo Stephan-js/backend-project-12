@@ -6,8 +6,8 @@ const { Unauthorized, NotFound } = HttpErrors;
 const getNextId = () => _.uniqueId();
 
 
-export default (app, state) => {
-  app.get('/api/channels', { preValidation: [app.authenticate] }, (req, reply) => {
+export default (server, state) => {
+  server.get('/api/channels', { preValidation: [server.authenticate] }, (req, reply) => {
     const user = state.users.find(({ id }) => id === req.user.userId);
 
     if (!user) {
@@ -20,7 +20,7 @@ export default (app, state) => {
       .send(state.channels);
   });
 
-  app.post('/api/channels', { preValidation: [app.authenticate] }, async (req, reply) => {
+  server.post('/api/channels', { preValidation: [server.authenticate] }, async (req, reply) => {
     const channel = req.body;
     const channelWithId = {
       ...channel,
@@ -28,14 +28,14 @@ export default (app, state) => {
       id: getNextId(),
     };
     state.channels.push(channelWithId);
-    app.io.emit('newChannel', channelWithId);
+    server.io.emit('newChannel', channelWithId);
 
     reply
       .header('Content-Type', 'application/json; charset=utf-8')
       .send(channelWithId);
   });
 
-  app.patch('/api/channels/:channelId', { preValidation: [app.authenticate] }, async (req, reply) => {
+  server.patch('/api/channels/:channelId', { preValidation: [server.authenticate] }, async (req, reply) => {
     const { channelId } = req.params;
     const { name } = req.body;
     const channel = state.channels.find((c) => c.id === channelId);
@@ -45,19 +45,19 @@ export default (app, state) => {
     }
     channel.name = name;
 
-    app.io.emit('renameChannel', channel);
+    server.io.emit('renameChannel', channel);
     reply
       .header('Content-Type', 'application/json; charset=utf-8')
       .send(channel);
   });
 
-  app.delete('/api/channels/:channelId', { preValidation: [app.authenticate] }, async (req, reply) => {
+  server.delete('/api/channels/:channelId', { preValidation: [server.authenticate] }, async (req, reply) => {
     const { channelId } = req.params;
     state.channels = state.channels.filter((c) => c.id !== channelId);
     state.messages = state.messages.filter((m) => m.channelId !== channelId);
     const data = { id: channelId };
 
-    app.io.emit('removeChannel', data);
+    server.io.emit('removeChannel', data);
     reply
       .header('Content-Type', 'application/json; charset=utf-8')
       .send(data);
