@@ -30,7 +30,7 @@ Options:
 
 ---
 
-## REST API Endpoints
+## User Control
 
 ### 1. Create New User
 **Endpoint:** `POST /api/account/signup`
@@ -54,7 +54,9 @@ axios.post('/api/account/login', { username: 'admin', password: 'admin' })
   });
 ```
 
-### 3. Get Channels
+## Channels
+
+### 1. Get Channels
 **Endpoint:** `GET /api/channels`
 
 **Example Request:**
@@ -68,7 +70,7 @@ axios.get('/api/channels', {
 });
 ```
 
-### 4. Add Channel
+### 2. Add Channel
 **Endpoint:** `POST /api/channels`
 
 **Example Request:**
@@ -84,7 +86,7 @@ axios.post('/api/channels', newChannel, {
 });
 ```
 
-### 5. Edit Channel
+### 3. Edit Channel
 **Endpoint:** `PATCH /api/channels/:id`
 
 **Example Request:**
@@ -100,7 +102,7 @@ axios.patch('/api/channels/3', editedChannel, {
 });
 ```
 
-### 6. Remove Channel
+### 4. Remove Channel
 **Endpoint:** `DELETE /api/channels/:id`
 
 **Example Request:**
@@ -114,7 +116,9 @@ axios.delete('/api/channels/3', {
 });
 ```
 
-### 7. Get Messages
+## Messages
+
+### 1. Get Messages
 **Endpoint:** `GET /api/messages`
 
 **Example Request:**
@@ -128,7 +132,7 @@ axios.get('/api/messages', {
 });
 ```
 
-### 8. Add Message
+### 2. Add Message
 **Endpoint:** `POST /api/messages`
 
 **Example Request:**
@@ -144,7 +148,7 @@ axios.post('/api/messages', newMessage, {
 });
 ```
 
-### 9. Edit Message
+### 3. Edit Message
 **Endpoint:** `PATCH /api/messages/:id`
 
 **Example Request:**
@@ -160,7 +164,7 @@ axios.patch('/api/messages/1', editedMessage, {
 });
 ```
 
-### 10. Remove Message
+### 4. Remove Message
 **Endpoint:** `DELETE /api//messages/:id`
 
 **Example Request:**
@@ -173,43 +177,6 @@ axios.delete('/api/messages/3', {
   console.log(response.data); // => { id: '3' }
 });
 ```
-
----
-
-## Socket Event Subscriptions
-
-### 1. Subscribe to New Messages
-
-```javascript
-socket.on('newMessage', (payload) => {
-  console.log(payload); // => { body: "new message", channelId: 7, id: 8, username: "admin" }
-});
-```
-
-### 2. Subscribe to New Channels
-
-```javascript
-socket.on('newChannel', (payload) => {
-  console.log(payload); // => { id: 6, name: "new channel", removable: true }
-});
-```
-
-### 3. Subscribe to Channel Removal
-
-```javascript
-socket.on('removeChannelf', (payload) => {
-  console.log(payload); // => { id: 6 }
-});
-```
-
-### 4. Subscribe to Channel Renaming
-
-```javascript
-socket.on('renameChannel', (payload) => {
-  console.log(payload); // => { id: 7, name: "new name channel", removable: true }
-});
-```
-
 ---
 
 Developed with ❤️ by [Stephan](https://github.com/Stephan-js)
