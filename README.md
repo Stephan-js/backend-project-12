@@ -177,6 +177,8 @@ axios.delete('/api/messages/3', {
   console.log(response.data); // => { id: '3' }
 });
 ```
+
 ---
+
 
 Developed with ❤️ by [Stephan](https://github.com/Stephan-js)
