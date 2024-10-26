@@ -17,23 +17,22 @@ export default (server, state) => {
     }
 
     const token = server.jwt.sign({ userId: user.id });
-    reply.send({ token });
+    reply.send({ token, user });
   });
 
-  // server.post('/api/account/delete', { preValidation: [server.authenticate] }, async (req, reply) => {
-  //   const user = state.users.find(({ id }) => id === req.user.userId);
+  server.delete('/api/account', { preValidation: [server.authenticate] }, async (req, reply) => {
+    const user = state.users.find(({ id }) => id === req.user.userId);
+    if (!user) {
+      reply.send(new Unauthorized());
+      return;
+    }
 
-  //   if (!user) {
-  //     reply.send(new Unauthorized());
-  //     return;
-  //   }
+    _.remove(state.users, ({ id }) => id === req.user.userId)
 
-  //   state.users
-
-  //   reply
-  //     .header('Content-Type', 'application/json; charset=utf-8')
-  //     .send(user);
-  // });
+    reply
+      .header('Content-Type', 'application/json; charset=utf-8')
+      .send(user.name);
+  });
 
   server.post('/api/account/signup', async (req, reply) => {
     const username = _.get(req.body, 'username');
