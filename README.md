@@ -165,7 +165,7 @@ axios.patch('/api/messages/1', editedMessage, {
 ```
 
 ### 4. Remove Message
-**Endpoint:** `DELETE /api//messages/:id`
+**Endpoint:** `DELETE /api/messages/:id`
 
 **Example Request:**
 ```javascript
