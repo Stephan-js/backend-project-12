@@ -36,7 +36,7 @@ export default async (server, options) => {
   setUpStaticAss(server, options.staticPath);
   await server.register(fastifySocketIo, {
     cors: {
-      origin: 'http://localhost:5001',
+      origin: 'http://localhost:10000',
       methods: ['GET', 'POST'],
       credentials: true,
     },

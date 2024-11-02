@@ -5,7 +5,7 @@ import { program } from 'commander';
 import Fastify from 'fastify';
 import plugins from '../src/plugin.js';
 
-const port = process.env.PORT || 5001;
+const port = process.env.PORT || 10000;
 const staticPath = path.join(process.cwd(), 'build');
 
 program

@@ -23,7 +23,7 @@ Usage: start-server [OPTIONS]
 
 Options:
   -a, --address <address>  Specify the address to listen on (default: "0.0.0.0")
-  -p, --port <port>        Specify the port to listen on (default: 5001)
+  -p, --port <port>        Specify the port to listen on (default: 10000)
   -s, --static <path>      Path to static asset files (default: "./build")
   -h, --help               Display help for the command
 ```
