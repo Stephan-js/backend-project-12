@@ -34,7 +34,13 @@ const setUpAuth = (server) => {
 export default async (server, options) => {
   setUpAuth(server);
   setUpStaticAss(server, options.staticPath);
-  await server.register(fastifySocketIo);
+  await server.register(fastifySocketIo, {
+    cors: {
+      origin: 'http://localhost:5001',
+      methods: ['GET', 'POST'],
+      credentials: true,
+    },
+  });
   addRoutes(server, options?.state || {});
 
   return server;
