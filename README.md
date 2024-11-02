@@ -178,6 +178,56 @@ axios.delete('/api/messages/3', {
 });
 ```
 
+## Socket event subscribes
+
+### 1. Subscribe new messages
+
+```javascript
+
+socket.on('newMessage', (payload) => {
+
+  console.log(payload); // => { body: "new message", channelId: 7, id: 8, username: "admin" }
+
+});
+
+```
+
+### 2. Subscribe new channel
+
+```javascript
+
+socket.on('newChannel', (payload) => {
+
+  console.log(payload) // { id: 6, name: "new channel", removable: true }
+
+});
+
+```
+
+### 3. Subscribe remove channel
+
+```javascript
+
+
+socket.on('removeChannel', (payload) => {
+
+  console.log(payload); // { id: 6 };
+
+});
+
+```
+
+### 4. Subscribe rename channel
+
+```javascript
+
+socket.on('renameChannel', (payload) => {
+
+  console.log(payload); // { id: 7, name: "new name channel", removable: true }
+
+});
+
+```
 ---
 
 
