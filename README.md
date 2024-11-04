@@ -186,7 +186,7 @@ axios.delete('/api/messages/3', {
 
 socket.on('newMessage', (payload) => {
 
-  console.log(payload); // => { body: "new message", channelId: 7, id: 8, username: "admin" }
+  console.log(payload); // => { id: '2', body: 'new body message', channelId: '1', username: 'admin' }
 
 });
 
