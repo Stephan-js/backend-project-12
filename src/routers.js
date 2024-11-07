@@ -40,15 +40,15 @@ const setSocketAuth = (server, state) => {
     if (!isHandshake) return next();
 
     const header = socket.handshake.headers["authorization"];
-    if (!header) return next(new Error('401'));
-    if (!header.startsWith("Bearer ")) return next(new Error('401'));
+    if (!header) return next(new Error('invalid token'));
+    if (!header.startsWith("Bearer ")) return next(new Error('invalid token'));
 
     const token = header.substring(7);
-    if (token === 'null') return next(new Error('401'));
+    if (token === 'null') return next(new Error('invalid token'));
 
     server.jwt.verify(token, 'supersecret', (err, decoded) => {
       const user = state.users.find(({ id }) => id === decoded.userId);
-      if (err || !user) return next(new Error('401'));
+      if (err || !user) return next(new Error('invalid token'));
 
       socket.user = decoded.data;
       next();
