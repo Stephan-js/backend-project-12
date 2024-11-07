@@ -46,6 +46,17 @@ export default (server, defualtStates = {}) => {
     console.log({ 'socket.id': socket.id });
   });
 
+  // server.io.use((socket, next) => {
+  //   try {
+  //     server.authenticate(socket.request);
+  //     console.log(12);
+  //     next();
+  //   } catch(err) {
+  //     console.log(123);
+  //     next()
+  //   }
+  // });
+
   initChannelsRoutes(server, state);
   initMessagesRoutes(server, state);
   initUsersRoutes(server, state);

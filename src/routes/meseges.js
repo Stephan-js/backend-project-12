@@ -20,9 +20,11 @@ export default (server, state) => {
   });
 
   server.post('/api/messages', { preValidation: [server.authenticate] }, async (req, reply) => {
+    const user = state.users.find(({ id }) => id === req.user.userId);
     const message = req.body;
     const messageWithId = {
       ...message,
+      username: user.username,
       removable: true,
       id: getNextId(),
     };
