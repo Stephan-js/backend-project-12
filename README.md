@@ -137,7 +137,7 @@ axios.get('/api/messages', {
 
 **Example Request:**
 ```javascript
-const newMessage = { body: 'new message', channelId: '1', username: 'admin' };
+const newMessage = { body: 'new message', channelId: '1' };
 
 axios.post('/api/messages', newMessage, {
   headers: {
@@ -198,10 +198,10 @@ socket.on('newMessage', (payload) => {
 
 socket.on('newChannel', (payload) => {
 
-  console.log(payload) // { id: 6, name: "new channel", removable: true }
+  console.log(payload) // { id: 6, name: "new channel", removable: true, secret: false }
 
 });
-
+  
 ```
 
 ### 3. Subscribe remove channel
