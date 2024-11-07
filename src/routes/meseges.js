@@ -8,7 +8,6 @@ const getNextId = () => _.uniqueId();
 export default (server, state) => {
   server.get('/api/messages', { preValidation: [server.authenticate] }, (req, reply) => {
     const user = state.users.find(({ id }) => id === req.user.userId);
-
     if (!user) {
       reply.send(new Unauthorized());
       return;
@@ -21,6 +20,11 @@ export default (server, state) => {
 
   server.post('/api/messages', { preValidation: [server.authenticate] }, async (req, reply) => {
     const user = state.users.find(({ id }) => id === req.user.userId);
+    if (!user) {
+      reply.send(new Unauthorized());
+      return;
+    }
+
     const message = req.body;
     const messageWithId = {
       ...message,
@@ -37,6 +41,12 @@ export default (server, state) => {
   });
 
   server.patch('/api/messages/:messageId', { preValidation: [server.authenticate] }, async (req, reply) => {
+    const user = state.users.find(({ id }) => id === req.user.userId);
+    if (!user) {
+      reply.send(new Unauthorized());
+      return;
+    }
+
     const { messageId } = req.params;
     const { body } = req.body;
     const message = state.messages.find((c) => c.id === messageId);
@@ -53,6 +63,12 @@ export default (server, state) => {
   });
 
   server.delete('/api/messages/:messageId', { preValidation: [server.authenticate] }, async (req, reply) => {
+    const user = state.users.find(({ id }) => id === req.user.userId);
+    if (!user) {
+      reply.send(new Unauthorized());
+      return;
+    }
+
     const { messageId } = req.params;
     state.messages = state.messages.filter((m) => m.id !== messageId);
     const data = { id: messageId };
