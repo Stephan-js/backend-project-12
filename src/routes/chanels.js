@@ -48,7 +48,7 @@ export default (server, state) => {
 
     const { channelId } = req.params;
     const { name } = req.body;
-    const channel = state.channels.find((c) => c.id === channelId);
+    const channel = state.channels.find((channel) => channel.id === channelId);
     if (!channel) {
       reply.send(new NotFound());
       return;
@@ -69,8 +69,8 @@ export default (server, state) => {
     }
 
     const { channelId } = req.params;
-    state.channels = state.channels.filter((c) => c.id !== channelId);
-    state.messages = state.messages.filter((m) => m.channelId !== channelId);
+    state.channels = state.channels.filter((channel) => channel.id !== channelId);
+    state.messages = state.messages.filter((messege) => messege.channelId !== channelId);
     const data = { id: channelId };
 
     server.io.emit('removeChannel', data);
