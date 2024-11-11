@@ -180,7 +180,19 @@ axios.delete('/api/messages/3', {
 
 ## Socket event subscribes
 
-// TODO: Need to add part about authentication in socket
+### Set up Socket.io
+
+```javascript
+
+const socket = io({
+  extraHeaders: {
+
+    authorization: `Bearer ${token}`,
+
+  },
+});
+
+```
 
 ### 1. Subscribe new messages
 
