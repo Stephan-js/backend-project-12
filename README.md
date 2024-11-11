@@ -180,6 +180,8 @@ axios.delete('/api/messages/3', {
 
 ## Socket event subscribes
 
+// TODO: Need to add part about authentication in socket
+
 ### 1. Subscribe new messages
 
 ```javascript
@@ -198,7 +200,7 @@ socket.on('newMessage', (payload) => {
 
 socket.on('newChannel', (payload) => {
 
-  console.log(payload) // { id: 6, name: "new channel", removable: true, secret: false }
+  console.log(payload) // { id: '6', name: "new channel", removable: true, secret: false }
 
 });
   
@@ -211,7 +213,7 @@ socket.on('newChannel', (payload) => {
 
 socket.on('removeChannel', (payload) => {
 
-  console.log(payload); // { id: 6 };
+  console.log(payload); // { id: '6' };
 
 });
 
@@ -223,7 +225,7 @@ socket.on('removeChannel', (payload) => {
 
 socket.on('renameChannel', (payload) => {
 
-  console.log(payload); // { id: 7, name: "new name channel", removable: true }
+  console.log(payload); // { id: '7', name: "new name channel", removable: true }
 
 });
 
