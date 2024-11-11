@@ -186,9 +186,7 @@ axios.delete('/api/messages/3', {
 
 const socket = io({
   extraHeaders: {
-
     authorization: `Bearer ${token}`,
-
   },
 });
 
