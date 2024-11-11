@@ -27,7 +27,7 @@ export default (server, state) => {
       return;
     }
 
-    _.remove(state.users, ({ id }) => id === req.user.userId)
+    _.remove(state.users, ({ id }) => id === req.user.userId);
 
     reply
       .header('Content-Type', 'application/json; charset=utf-8')
@@ -44,7 +44,9 @@ export default (server, state) => {
       return;
     }
 
-    const newUser = { id: getId(), username, password, admin: false };
+    const newUser = {
+      id: getId(), username, password, admin: false,
+    };
     const token = server.jwt.sign({ userId: newUser.id });
     state.users.push(newUser);
     reply

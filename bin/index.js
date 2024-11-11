@@ -3,6 +3,7 @@
 import path from 'path';
 import { program } from 'commander';
 import Fastify from 'fastify';
+// eslint-disable-next-line import/extensions
 import plugins from '../src/plugin.js';
 
 const port = process.env.PORT || 5001;

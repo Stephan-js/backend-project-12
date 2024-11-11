@@ -3,6 +3,7 @@ import fastifyStatic from '@fastify/static';
 import fastifyJWT from '@fastify/jwt';
 import HttpErrors from 'http-errors';
 
+// eslint-disable-next-line import/extensions
 import addRoutes from './routers.js';
 
 const { Unauthorized } = HttpErrors;

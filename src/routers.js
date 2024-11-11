@@ -1,11 +1,9 @@
+/* eslint-disable import/extensions */
 import _ from 'lodash';
-import HttpErrors from 'http-errors';
 
 import initUsersRoutes from './routes/users.js';
 import initMessagesRoutes from './routes/meseges.js';
 import initChannelsRoutes from './routes/chanels.js';
-
-const { Unauthorized } = HttpErrors;
 
 const getId = () => _.uniqueId();
 
@@ -35,8 +33,8 @@ const setSocketAuth = (server, state) => {
     const isHandshake = socket.handshake.query.sid === undefined;
     if (!isHandshake) return next();
 
-    const header = socket.handshake.headers["authorization"];
-    if (!header || !header.startsWith("Bearer ")) return next(new Error('invalid token'));
+    const header = socket.handshake.headers.authorization;
+    if (!header || !header.startsWith('Bearer ')) return next(new Error('invalid token'));
 
     const token = header.substring(7);
     if (token === 'null') return next(new Error('invalid token'));
@@ -44,12 +42,11 @@ const setSocketAuth = (server, state) => {
     server.jwt.verify(token, 'supersecret', (err, decoded) => {
       const user = state.users.find(({ id }) => id === decoded.userId);
       if (err || !user) return next(new Error('invalid token'));
-
-      socket.user = decoded.data;
-      next();
+      return true;
     });
+    return next();
   });
-}
+};
 
 export default (server, defualtStates = {}) => {
   const state = buildStates(defualtStates);

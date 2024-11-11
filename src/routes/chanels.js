@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 import _ from 'lodash';
 import HttpErrors from 'http-errors';
 
@@ -48,7 +49,7 @@ export default (server, state) => {
 
     const { channelId } = req.params;
     const { name } = req.body;
-    const channel = state.channels.find((channel) => channel.id === channelId);
+    const channel = state.channels.find((chan) => chan.id === channelId);
     if (!channel) {
       reply.send(new NotFound());
       return;
