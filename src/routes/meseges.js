@@ -50,7 +50,7 @@ export default (server, state) => {
 
     const { messageId } = req.params;
     const { body } = req.body;
-    const message = state.messages.find((c) => c.id === messageId);
+    const message = state.messages.find(({ id }) => id === messageId);
     if (!message) {
       reply.send(new NotFound());
       return;
@@ -71,7 +71,7 @@ export default (server, state) => {
     }
 
     const { messageId } = req.params;
-    state.messages = state.messages.filter((m) => m.id !== messageId);
+    state.messages = state.messages.filter(({ id }) => id !== messageId);
     const data = { id: messageId };
 
     server.io.emit('removeMessage', data);

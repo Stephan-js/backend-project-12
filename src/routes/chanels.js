@@ -49,7 +49,7 @@ export default (server, state) => {
 
     const { channelId } = req.params;
     const { name } = req.body;
-    const channel = state.channels.find((chan) => chan.id === channelId);
+    const channel = state.channels.find(({ id }) => id === channelId);
     if (!channel) {
       reply.send(new NotFound());
       return;
@@ -70,7 +70,7 @@ export default (server, state) => {
     }
 
     const { channelId } = req.params;
-    state.channels = state.channels.filter((channel) => channel.id !== channelId);
+    state.channels = state.channels.filter(({ id }) => id !== channelId);
     state.messages = state.messages.filter((messege) => messege.channelId !== channelId);
     const data = { id: channelId };
 

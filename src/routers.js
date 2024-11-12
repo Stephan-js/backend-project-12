@@ -11,18 +11,24 @@ const buildStates = (defaultStates) => {
   const state = {
     channels: [
       {
-        id: getId(), name: 'general', removable: false, secret: false,
+        id: getId(), name: 'general', removable: false,
       },
       {
-        id: getId(), name: 'random', removable: false, secret: false,
+        id: getId(), name: 'random', removable: false,
+      },
+    ],
+    secretChannels: [
+      {
+        id: getId(), name: 'admins', removable: false,
       },
     ],
     messages: [],
     users: [],
   };
 
-  if (defaultStates.messages) state.messages.push(...defaultStates.messages);
   if (defaultStates.channels) state.channels.push(...defaultStates.channels);
+  if (defaultStates.secretChannels) state.channels.push(...defaultStates.secretChannels);
+  if (defaultStates.messages) state.messages.push(...defaultStates.messages);
   if (defaultStates.users) state.users.push(...defaultStates.users);
 
   return state;
