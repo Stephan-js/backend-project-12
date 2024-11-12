@@ -1,4 +1,8 @@
-# Backend Chat Application
+# Chat Application Backend Documentation
+
+This backend powers a chat application that works with a compatible frontend.
+
+[Frontend Repo Example](https://github.com/Stephan-js/frontend-project-12)
 
 ## Installation
 
