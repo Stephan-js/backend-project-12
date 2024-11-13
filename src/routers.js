@@ -17,17 +17,20 @@ const buildStates = (defaultStates) => {
         id: getId(), name: 'random', removable: false,
       },
     ],
-    secretChannels: [
-      {
-        id: getId(), name: 'admins', removable: false,
-      },
-    ],
+    // secretChannels: [
+    //   {
+    //     id: getId(), name: 'general secret', removable: false,
+    //   },
+    //   {
+    //     id: getId(), name: 'random secret', removable: false,
+    //   },
+    // ],
     messages: [],
     users: [],
   };
 
   if (defaultStates.channels) state.channels.push(...defaultStates.channels);
-  if (defaultStates.secretChannels) state.channels.push(...defaultStates.secretChannels);
+  // if (defaultStates.secretChannels) state.channels.push(...defaultStates.secretChannels);
   if (defaultStates.messages) state.messages.push(...defaultStates.messages);
   if (defaultStates.users) state.users.push(...defaultStates.users);
 
@@ -58,6 +61,7 @@ export default (server, defualtStates = {}) => {
   const state = buildStates(defualtStates);
 
   server.io.on('connect', (socket) => {
+    // eslint-disable-next-line no-console
     console.log({ 'socket.id': socket.id });
   });
 

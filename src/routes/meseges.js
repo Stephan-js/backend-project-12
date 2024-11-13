@@ -30,7 +30,6 @@ export default (server, state) => {
     const messageWithId = {
       ...message,
       username: user.username,
-      removable: true,
       id: getNextId(),
     };
     state.messages.push(messageWithId);

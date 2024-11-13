@@ -17,21 +17,7 @@ export default (server, state) => {
     }
 
     const token = server.jwt.sign({ userId: user.id });
-    reply.send({ token, user });
-  });
-
-  server.delete('/api/account', { preValidation: [server.authenticate] }, async (req, reply) => {
-    const user = state.users.find(({ id }) => id === req.user.userId);
-    if (!user) {
-      reply.send(new Unauthorized());
-      return;
-    }
-
-    _.remove(state.users, ({ id }) => id === req.user.userId);
-
-    reply
-      .header('Content-Type', 'application/json; charset=utf-8')
-      .send(user.name);
+    reply.send({ token });
   });
 
   server.post('/api/account/signup', async (req, reply) => {
@@ -52,6 +38,20 @@ export default (server, state) => {
     reply
       .code(201)
       .header('Content-Type', 'application/json; charset=utf-8')
-      .send({ token, user });
+      .send({ token });
+  });
+
+  server.delete('/api/account', { preValidation: [server.authenticate] }, async (req, reply) => {
+    const user = state.users.find(({ id }) => id === req.user.userId);
+    if (!user) {
+      reply.send(new Unauthorized());
+      return;
+    }
+
+    _.remove(state.users, ({ id }) => id === req.user.userId);
+
+    reply
+      .header('Content-Type', 'application/json; charset=utf-8')
+      .send({ name: user.name });
   });
 };

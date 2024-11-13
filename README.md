@@ -43,7 +43,7 @@ Options:
 ```javascript
 axios.post('/api/account/signup', { username: 'newuser', password: '123456' })
   .then((response) => {
-    console.log(response.data); // => { token: ..., username: 'newuser' }
+    console.log(response.data); // => { token: ... }
   });
 ```
 
@@ -54,8 +54,22 @@ axios.post('/api/account/signup', { username: 'newuser', password: '123456' })
 ```javascript
 axios.post('/api/account/login', { username: 'admin', password: 'admin' })
   .then((response) => {
-    console.log(response.data); // => { token: ..., username: 'admin' }
+    console.log(response.data); // => { token: ... }
   });
+```
+
+### 3. Delete
+**Endpoint:** `DELETE /api/account`
+
+**Example Request:**
+```javascript
+axios.delete('/api/account', {
+  headers: {
+    Authorization: `Bearer ${token}`,
+  },
+}).then((response) => {
+  console.log(response.data); // => { name: 'user' }
+});
 ```
 
 ## Channels
@@ -214,7 +228,7 @@ socket.on('newMessage', (payload) => {
 
 socket.on('newChannel', (payload) => {
 
-  console.log(payload) // { id: '6', name: "new channel", removable: true, secret: false }
+  console.log(payload) // { id: '6', name: "new channel", removable: true }
 
 });
   
