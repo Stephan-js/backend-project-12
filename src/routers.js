@@ -10,10 +10,9 @@ const getId = () => _.uniqueId();
 const buildStates = (defaultRules) => {
   const state = {
     rules: {
-      freeDeleteChannels: true,
-      freeRenameChannels: true,
-      freeAddChannels: true,
-      ...defaultRules,
+      freeDeleteChannels: defaultRules[0],
+      freeRenameChannels: defaultRules[1],
+      freeAddChannels: defaultRules[2],
     },
     channels: [
       {
