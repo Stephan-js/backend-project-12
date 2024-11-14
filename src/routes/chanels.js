@@ -25,6 +25,10 @@ export default (server, state) => {
       reply.send(new Unauthorized());
       return;
     }
+    if (!user.admin && !state.rules.channels.freeAdd) {
+      reply.send(new Unauthorized());
+      return;
+    }
 
     const channel = req.body;
     const channelWithId = {
@@ -43,6 +47,10 @@ export default (server, state) => {
   server.patch('/api/channels/:channelId', { preValidation: [server.authenticate] }, async (req, reply) => {
     const user = state.users.find(({ id }) => id === req.user.userId);
     if (!user) {
+      reply.send(new Unauthorized());
+      return;
+    }
+    if (!user.admin && !state.rules.channels.freeRename) {
       reply.send(new Unauthorized());
       return;
     }
@@ -65,6 +73,10 @@ export default (server, state) => {
   server.delete('/api/channels/:channelId', { preValidation: [server.authenticate] }, async (req, reply) => {
     const user = state.users.find(({ id }) => id === req.user.userId);
     if (!user) {
+      reply.send(new Unauthorized());
+      return;
+    }
+    if (!user.admin && !state.rules.channels.freeDelete) {
       reply.send(new Unauthorized());
       return;
     }

@@ -68,7 +68,7 @@ axios.delete('/api/account', {
     Authorization: `Bearer ${token}`,
   },
 }).then((response) => {
-  console.log(response.data); // => { name: 'user' }
+  console.log(response.data); // => { username: 'user' }
 });
 ```
 
@@ -146,7 +146,7 @@ axios.get('/api/messages', {
     Authorization: `Bearer ${token}`,
   },
 }).then((response) => {
-  console.log(response.data); // => [{ id: '1', body: 'text message', channelId: '1', username: 'admin' }, ...]
+  console.log(response.data); // => [{ id: '1', body: 'text message', channelId: '1', username: 'user' }, ...]
 });
 ```
 
@@ -162,7 +162,7 @@ axios.post('/api/messages', newMessage, {
     Authorization: `Bearer ${token}`,
   },
 }).then((response) => {
-  console.log(response.data); // => { id: '1', body: 'new message', channelId: '1', username: 'admin' }
+  console.log(response.data); // => { id: '1', body: 'new message', channelId: '1', username: 'user' }
 });
 ```
 
@@ -178,7 +178,7 @@ axios.patch('/api/messages/1', editedMessage, {
     Authorization: `Bearer ${token}`,
   },
 }).then((response) => {
-  console.log(response.data); // => { id: '1', body: 'new body message', channelId: '1', username: 'admin' }
+  console.log(response.data); // => { id: '1', body: 'edited message', channelId: '1', username: 'user' }
 });
 ```
 
@@ -215,9 +215,7 @@ const socket = io({
 ```javascript
 
 socket.on('newMessage', (payload) => {
-
-  console.log(payload); // => { id: '2', body: 'new body message', channelId: '1', username: 'admin' }
-
+  console.log(payload); // => { id: '2', body: 'edited message', channelId: '1', username: 'user' }
 });
 
 ```
@@ -227,9 +225,7 @@ socket.on('newMessage', (payload) => {
 ```javascript
 
 socket.on('newChannel', (payload) => {
-
   console.log(payload) // { id: '6', name: "new channel", removable: true }
-
 });
   
 ```
@@ -240,9 +236,7 @@ socket.on('newChannel', (payload) => {
 
 
 socket.on('removeChannel', (payload) => {
-
   console.log(payload); // { id: '6' };
-
 });
 
 ```
@@ -252,9 +246,7 @@ socket.on('removeChannel', (payload) => {
 ```javascript
 
 socket.on('renameChannel', (payload) => {
-
   console.log(payload); // { id: '7', name: "new name channel", removable: true }
-
 });
 
 ```

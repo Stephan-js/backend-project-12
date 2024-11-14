@@ -52,6 +52,6 @@ export default (server, state) => {
 
     reply
       .header('Content-Type', 'application/json; charset=utf-8')
-      .send({ name: user.name });
+      .send({ username: user.name });
   });
 };

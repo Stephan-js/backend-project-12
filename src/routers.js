@@ -7,8 +7,14 @@ import initChannelsRoutes from './routes/chanels.js';
 
 const getId = () => _.uniqueId();
 
-const buildStates = (defaultStates) => {
+const buildStates = (defaultRules) => {
   const state = {
+    rules: {
+      freeDeleteChannels: true,
+      freeRenameChannels: true,
+      freeAddChannels: true,
+      ...defaultRules,
+    },
     channels: [
       {
         id: getId(), name: 'general', removable: false,
@@ -29,11 +35,6 @@ const buildStates = (defaultStates) => {
     users: [],
   };
 
-  if (defaultStates.channels) state.channels.push(...defaultStates.channels);
-  // if (defaultStates.secretChannels) state.channels.push(...defaultStates.secretChannels);
-  if (defaultStates.messages) state.messages.push(...defaultStates.messages);
-  if (defaultStates.users) state.users.push(...defaultStates.users);
-
   return state;
 };
 
@@ -42,26 +43,27 @@ const setSocketAuth = (server, state) => {
     const isHandshake = socket.handshake.query.sid === undefined;
     if (!isHandshake) return next();
 
+    const error = new Error('invalid token');
     const header = socket.handshake.headers.authorization;
-    if (!header || !header.startsWith('Bearer ')) return next(new Error('invalid token'));
+    if (!header || !header.startsWith('Bearer ')) return next(error);
 
     const token = header.substring(7);
-    if (token === 'null') return next(new Error('invalid token'));
+    if (token === 'null') return next(error);
 
     server.jwt.verify(token, 'supersecret', (err, decoded) => {
       const user = state.users.find(({ id }) => id === decoded.userId);
-      if (err || !user) return next(new Error('invalid token'));
+      if (err || !user) return next(error);
       return true;
     });
     return next();
   });
 };
 
-export default (server, defualtStates = {}) => {
-  const state = buildStates(defualtStates);
+export default (server, defualtRules) => {
+  const state = buildStates(defualtRules);
+  console.log(state);
 
   server.io.on('connect', (socket) => {
-    // eslint-disable-next-line no-console
     console.log({ 'socket.id': socket.id });
   });
 

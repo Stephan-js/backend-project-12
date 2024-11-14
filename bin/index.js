@@ -14,6 +14,7 @@ program
   .option('-a, --address <address>', 'address to listen on', '0.0.0.0')
   .option('-p, --port <port>', 'port to listen on', port)
   .option('-s, --static <path>', 'path to static assets files', staticPath)
+  .option('-r, --rules <rules>', 'add custom rules for server', 'freeDeleteChannels: false')
   .parse(process.argv);
 
 const options = program.opts();
@@ -26,6 +27,11 @@ const start = async () => {
   try {
     const appOptions = {
       staticPath: path.resolve(process.cwd(), options.static),
+      rules: options.rules.split(', ').reduce((acc, pair) => {
+        const [key, value] = pair.split(': ');
+        acc[key] = value === 'true';
+        return acc;
+      }, {}),
     };
     const preparedServer = await plugins(fastify, appOptions);
     await preparedServer.listen({ port: options.port, host: options.address });

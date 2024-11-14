@@ -1,14 +1,14 @@
+/* eslint-disable import/extensions */
 import fastifySocketIo from 'fastify-socket.io';
 import fastifyStatic from '@fastify/static';
 import fastifyJWT from '@fastify/jwt';
 import HttpErrors from 'http-errors';
 
-// eslint-disable-next-line import/extensions
 import addRoutes from './routers.js';
 
 const { Unauthorized } = HttpErrors;
 
-const setUpStaticAss = (server, buildPath) => {
+const setUpStaticAssets = (server, buildPath) => {
   server.register(fastifyStatic, {
     root: buildPath,
   });
@@ -34,9 +34,9 @@ const setUpAuth = (server) => {
 
 export default async (server, options) => {
   setUpAuth(server);
-  setUpStaticAss(server, options.staticPath);
+  setUpStaticAssets(server, options.staticPath);
   await server.register(fastifySocketIo);
-  addRoutes(server, options?.state || {});
+  addRoutes(server, options.rules);
 
   return server;
 };
