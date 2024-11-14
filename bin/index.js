@@ -14,7 +14,7 @@ program
   .option('-a, --address <address>', 'address to listen on', '0.0.0.0')
   .option('-p, --port <port>', 'port to listen on', port)
   .option('-s, --static <path>', 'path to static assets files', staticPath)
-  .option('-r, --rules <rules>', 'add custom rules for server', 'true, true, true')
+  .option('-r, --rules <rules>', 'add custom rules for server', 'true, true')
   .parse(process.argv);
 
 const options = program.opts();

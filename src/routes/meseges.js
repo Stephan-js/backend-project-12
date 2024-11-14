@@ -46,6 +46,10 @@ export default (server, state) => {
       reply.send(new Unauthorized());
       return;
     }
+    if (!user.admin && !state.rules.freeEditMessages) {
+      reply.send(new Unauthorized());
+      return;
+    }
 
     const { messageId } = req.params;
     const { body } = req.body;
@@ -65,6 +69,10 @@ export default (server, state) => {
   server.delete('/api/messages/:messageId', { preValidation: [server.authenticate] }, async (req, reply) => {
     const user = state.users.find(({ id }) => id === req.user.userId);
     if (!user) {
+      reply.send(new Unauthorized());
+      return;
+    }
+    if (!user.admin && !state.rules.freeEditMessages) {
       reply.send(new Unauthorized());
       return;
     }

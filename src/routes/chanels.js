@@ -25,7 +25,7 @@ export default (server, state) => {
       reply.send(new Unauthorized());
       return;
     }
-    if (!user.admin && !state.rules.channels.freeAdd) {
+    if (!user.admin && !state.rules.freeEditChannels) {
       reply.send(new Unauthorized());
       return;
     }
@@ -50,7 +50,7 @@ export default (server, state) => {
       reply.send(new Unauthorized());
       return;
     }
-    if (!user.admin && !state.rules.channels.freeRename) {
+    if (!user.admin && !state.rules.freeEditChannels) {
       reply.send(new Unauthorized());
       return;
     }
@@ -76,7 +76,7 @@ export default (server, state) => {
       reply.send(new Unauthorized());
       return;
     }
-    if (!user.admin && !state.rules.channels.freeDelete) {
+    if (!user.admin && !state.rules.freeEditChannels) {
       reply.send(new Unauthorized());
       return;
     }
