@@ -22,6 +22,8 @@ npx start-server
 
 ### Options for `start-server`
 
+TODO: need to add rules options
+
 ```
 Usage: start-server [OPTIONS]
 
