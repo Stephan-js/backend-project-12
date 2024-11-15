@@ -36,6 +36,8 @@ Options:
 
 ---
 
+TODO: need to add rule settings
+
 ## User Control
 
 ### 1. Create New User
