@@ -1,5 +1,7 @@
 # Chat Application Backend Documentation
 
+TODO: change discriptions
+
 This backend powers a chat application that works with a compatible frontend.
 
 [Frontend Repo Example](https://github.com/Stephan-js/frontend-project-12)
