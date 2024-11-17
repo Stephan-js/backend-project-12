@@ -47,7 +47,7 @@ TODO: need to add rule settings
 
 **Example Request:**
 ```javascript
-axios.post('/api/account/signup', { username: 'newuser', password: '123456' })
+axios.post('/api/account/signup', { username: 'newUser', password: '123456' })
   .then((response) => {
     console.log(response.data); // => { token: ... }
   });
@@ -58,7 +58,7 @@ axios.post('/api/account/signup', { username: 'newuser', password: '123456' })
 
 **Example Request:**
 ```javascript
-axios.post('/api/account/login', { username: 'admin', password: 'admin' })
+axios.post('/api/account/login', { username: 'newUser', password: '123456' })
   .then((response) => {
     console.log(response.data); // => { token: ... }
   });
