@@ -41,17 +41,22 @@ export default (server, state) => {
       .send({ token });
   });
 
-  server.delete('/api/account', { preValidation: [server.authenticate] }, async (req, reply) => {
+  server.post('/api/account/delete', { preValidation: [server.authenticate] }, async (req, reply) => {
     const user = state.users.find(({ id }) => id === req.user.userId);
     if (!user) {
       reply.send(new Unauthorized());
       return;
     }
+    const delUser = -_.get(req.body, 'username');
+
+    if (delUser !== user.username || !user.admin) {
+      reply.send(new Unauthorized());
+      return;
+    }
 
     _.remove(state.users, ({ id }) => id === req.user.userId);
-
     reply
       .header('Content-Type', 'application/json; charset=utf-8')
-      .send({ username: user.name });
+      .send({ username: delUser });
   });
 };
