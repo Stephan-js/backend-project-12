@@ -65,11 +65,11 @@ axios.post('/api/account/login', { username: 'admin', password: 'admin' })
 ```
 
 ### 3. Delete
-**Endpoint:** `DELETE /api/account`
+**Endpoint:** `POST /api/account/delete`
 
 **Example Request:**
 ```javascript
-axios.delete('/api/account', {
+axios.post('/api/account/delete', { username: 'user' }, {
   headers: {
     Authorization: `Bearer ${token}`,
   },
