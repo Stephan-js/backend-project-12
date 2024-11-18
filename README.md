@@ -82,12 +82,14 @@ axios.post('/api/account/login', { username: 'newUser', password: '123456' })
 
 **Example Request:**
 ```javascript
+// Admins can delete any user account. Regular users can only delete their own.
 axios.post('/api/account/delete', { username: 'user' }, {
-  headers: {
-    Authorization: `Bearer ${token}`,
-  },
-}).then((response) => {
-  console.log(response.data); // => { username: 'user' }
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  }
+).then((response) => {
+  console.log(response.data); // Example response: { username: 'user' }
 });
 ```
 
