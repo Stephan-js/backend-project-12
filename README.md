@@ -22,9 +22,8 @@ To start the server, run:
 npx start-server
 ```
 
-### Options for `start-server`
+### Options for start-server
 
-TODO: need to add rules options
 
 ```
 Usage: start-server [OPTIONS]
@@ -33,12 +32,26 @@ Options:
   -a, --address <address>  Specify the address to listen on (default: "0.0.0.0")
   -p, --port <port>        Specify the port to listen on (default: 5001)
   -s, --static <path>      Path to static asset files (default: "./build")
+  -r, --rule <rule>        Set server rules as a comma-separated list:
+                           - First value: Allow all users to delete/rename channels (true/false)
+                           - Second value: Allow all users to edit messages (true/false)
+                           (default: "true,true")
   -h, --help               Display help for the command
 ```
 
----
 
-TODO: need to add rule settings
+### Rule Settings
+
+The `-r` or `--rule` option accepts a pair of boolean values to configure server behavior. 
+
+1. **Channel Editing Rule**  
+   - `true`: All users can delete or rename channels.  
+   - `false`: Only admins can delete or rename channels.  
+
+2. **Message Editing Rule**  
+   - `true`: All users can edit their own messages.  
+   - `false`: Only admins can edit messages.  
+
 
 ## User Control
 

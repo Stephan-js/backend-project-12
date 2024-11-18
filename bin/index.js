@@ -14,7 +14,7 @@ program
   .option('-a, --address <address>', 'address to listen on', '0.0.0.0')
   .option('-p, --port <port>', 'port to listen on', port)
   .option('-s, --static <path>', 'path to static assets files', staticPath)
-  .option('-r, --rules <rules>', 'add custom rules for server', 'true, true')
+  .option('-r, --rule <rule>', 'Set custom server rules', 'true,true')
   .parse(process.argv);
 
 const options = program.opts();
@@ -27,7 +27,7 @@ const start = async () => {
   try {
     const appOptions = {
       staticPath: path.resolve(process.cwd(), options.static),
-      rules: options.rules.split(', ').map((e) => e === 'true'),
+      rules: options.rule.split(', ').map((e) => e === 'true'),
     };
     const preparedServer = await plugins(fastify, appOptions);
     await preparedServer.listen({ port: options.port, host: options.address });
