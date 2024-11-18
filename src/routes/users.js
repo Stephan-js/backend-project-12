@@ -47,14 +47,14 @@ export default (server, state) => {
       reply.send(new Unauthorized());
       return;
     }
-    const delUser = -_.get(req.body, 'username');
+    const delUser = _.get(req.body, 'userName');
 
-    if (delUser !== user.username || !user.admin) {
+    if (delUser !== user.username && !user.admin) {
       reply.send(new Unauthorized());
       return;
     }
 
-    _.remove(state.users, ({ id }) => id === req.user.userId);
+    _.remove(state.users, ({ username }) => username === delUser);
     reply
       .header('Content-Type', 'application/json; charset=utf-8')
       .send({ username: delUser });

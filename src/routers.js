@@ -59,7 +59,6 @@ const setSocketAuth = (server, state) => {
 
 export default (server, defualtRules) => {
   const state = buildStates(defualtRules);
-  console.log(state);
 
   server.io.on('connect', (socket) => {
     console.log({ 'socket.id': socket.id });
