@@ -47,7 +47,7 @@ export default (server, state) => {
       reply.send(new Unauthorized());
       return;
     }
-    const delUser = _.get(req.body, 'userName');
+    const delUser = _.get(req.body, 'username');
 
     if (delUser !== user.username && !user.admin) {
       reply.send(new Unauthorized());
