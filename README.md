@@ -99,7 +99,7 @@ axios.delete('/api/account/user', {
 **Example Request:**
 ```javascript
 // Admins can renames any user account. Regular users can only rename their own.
-axios.delete('/api/account/user', { username: 'newName' }, {
+axios.patch('/api/account/user', { username: 'newName' }, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
