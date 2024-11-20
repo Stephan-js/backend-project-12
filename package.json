@@ -1,6 +1,6 @@
 {
   "name": "chat-app-server",
-  "version": "0.5.3",
+  "version": "0.5.4",
   "description": "",
   "main": "plugin.js",
   "type": "module",
