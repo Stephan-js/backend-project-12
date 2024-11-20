@@ -9,7 +9,7 @@ export default (server, state) => {
   server.post('/api/account/login', async (req, reply) => {
     const username = _.get(req.body, 'username');
     const password = _.get(req.body, 'password');
-    const user = state.users.find((u) => u.username === username);
+    const user = state.users.find((u) => u === username);
 
     if (!user || user.password !== password) {
       reply.send(new Unauthorized());
@@ -41,22 +41,49 @@ export default (server, state) => {
       .send({ token });
   });
 
-  server.post('/api/account/delete', { preValidation: [server.authenticate] }, async (req, reply) => {
+  server.patch('/api/account/:renUsername', { preValidation: [server.authenticate] }, async (req, reply) => {
     const user = state.users.find(({ id }) => id === req.user.userId);
     if (!user) {
       reply.send(new Unauthorized());
       return;
     }
-    const delUser = _.get(req.body, 'username');
 
-    if (delUser !== user.username && !user.admin) {
+    const { renUsername } = req.params;
+    if (renUsername !== user.username && !user.admin) {
       reply.send(new Unauthorized());
       return;
     }
 
-    _.remove(state.users, ({ username }) => username === delUser);
+    const newUsername = _.get(req.body, 'username');
+    const userWithThisName = state.users.find(({ username }) => username === newUsername);
+    if (userWithThisName) {
+      reply.send(new Conflict());
+      return;
+    }
+
+    const renamedUser = state.users.find(({ username }) => username === renUsername);
+    renamedUser.username = newUsername;
     reply
       .header('Content-Type', 'application/json; charset=utf-8')
-      .send({ username: delUser });
+      .send({ username: newUsername });
+  });
+
+  server.delete('/api/account/:deleteUsername', { preValidation: [server.authenticate] }, async (req, reply) => {
+    const user = state.users.find(({ id }) => id === req.user.userId);
+    if (!user) {
+      reply.send(new Unauthorized());
+      return;
+    }
+    const { deleteUsername } = req.params;
+
+    if (deleteUsername !== user.username && !user.admin) {
+      reply.send(new Unauthorized());
+      return;
+    }
+
+    _.remove(state.users, ({ username }) => username === deleteUsername);
+    reply
+      .header('Content-Type', 'application/json; charset=utf-8')
+      .send({ username: deleteUsername });
   });
 };

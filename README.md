@@ -78,18 +78,34 @@ axios.post('/api/account/login', { username: 'newUser', password: '123456' })
 ```
 
 ### 3. Delete
-**Endpoint:** `POST /api/account/delete`
+**Endpoint:** `DELETE /api/account/:username`
 
 **Example Request:**
 ```javascript
 // Admins can delete any user account. Regular users can only delete their own.
-axios.post('/api/account/delete', { username: 'user' }, {
+axios.delete('/api/account/user', {
     headers: {
       Authorization: `Bearer ${token}`,
     },
   }
 ).then((response) => {
   console.log(response.data); // Example response: { username: 'user' }
+});
+```
+
+### 4. Rename
+**Endpoint:** `PATCH /api/account/:username`
+
+**Example Request:**
+```javascript
+// Admins can renames any user account. Regular users can only rename their own.
+axios.delete('/api/account/user', { username: 'newName' }, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  }
+).then((response) => {
+  console.log(response.data); // Example response: { username: 'newName' }
 });
 ```
 
