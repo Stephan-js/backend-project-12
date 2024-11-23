@@ -9,7 +9,7 @@ This backend powers a chat application that works with a compatible frontend.
 To install the necessary package, use the following command:
 
 ```bash
-npm i chat-app-server
+npm i -s chat-app-server
 ```
 
 ## Running the Server
@@ -58,7 +58,7 @@ The `-r` or `--rule` option accepts a pair of boolean values to configure server
 
 **Example Request:**
 ```javascript
-axios.post('/api/account/signup', { username: 'newUser', password: '123456' })
+axios.post('/api/account/signup', { username: 'user', password: '123456' })
   .then((response) => {
     console.log(response.data); // => { token: ... }
   });
@@ -69,7 +69,7 @@ axios.post('/api/account/signup', { username: 'newUser', password: '123456' })
 
 **Example Request:**
 ```javascript
-axios.post('/api/account/login', { username: 'newUser', password: '123456' })
+axios.post('/api/account/login', { username: 'user', password: '123456' })
   .then((response) => {
     console.log(response.data); // => { token: ... }
   });

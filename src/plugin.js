@@ -26,7 +26,7 @@ const setUpAuth = (server) => {
     .decorate('authenticate', async (req, reply) => {
       try {
         await req.jwtVerify();
-      } catch (err) {
+      } catch {
         reply.send(new Unauthorized());
       }
     });

@@ -27,7 +27,7 @@ const start = async () => {
   try {
     const appOptions = {
       staticPath: path.resolve(process.cwd(), options.static),
-      rules: options.rule.split(', ').map((e) => e === 'true'),
+      rules: options.rule.split(',').map((e) => e === 'true'),
     };
     const preparedServer = await plugins(fastify, appOptions);
     await preparedServer.listen({ port: options.port, host: options.address });
