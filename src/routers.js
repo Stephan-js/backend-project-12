@@ -1,12 +1,9 @@
 /* eslint-disable import/extensions */
-import HttpErrors from 'http-errors';
 import _ from 'lodash';
 
 import initUsersRoutes from './routes/users.js';
 import initMessagesRoutes from './routes/meseges.js';
 import initChannelsRoutes from './routes/chanels.js';
-
-const { Unauthorized } = HttpErrors;
 
 const getId = () => _.uniqueId();
 
@@ -44,15 +41,18 @@ const setSocketAuth = (server, state) => {
     const isHandshake = socket.handshake.query.sid === undefined;
     if (!isHandshake) return next();
 
+    const error = new Error('invalid token');
+
     const header = socket.handshake.headers.authorization;
-    if (!header || !header.startsWith('Bearer ')) return next(new Unauthorized());
+    if (!header || !header.startsWith('Bearer ')) return next(error);
 
     const token = header.substring(7);
-    if (token === 'null') return next(new Unauthorized());
+    if (token === 'null') return next(error);
 
     server.jwt.verify(token, 'supersecret', (err, decoded) => {
+      if (err) return next(error);
       const user = state.users.find(({ id }) => id === decoded.userId);
-      if (err || !user) return next(new Unauthorized());
+      if (!user) return next(error);
       return true;
     });
     return next();
