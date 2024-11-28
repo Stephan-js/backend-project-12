@@ -1,4 +1,3 @@
-/* eslint-disable import/extensions */
 import _ from 'lodash';
 
 import initUsersRoutes from './routes/users.js';
@@ -15,10 +14,14 @@ const buildStates = (defaultRules) => {
     },
     channels: [
       {
-        id: getId(), name: 'general', removable: false,
+        id: getId(),
+        name: 'general',
+        removable: false,
       },
       {
-        id: getId(), name: 'random', removable: false,
+        id: getId(),
+        name: 'random',
+        removable: false,
       },
     ],
     // secretChannels: [
@@ -72,8 +75,7 @@ export default (server, defualtRules) => {
   initMessagesRoutes(server, state);
   initUsersRoutes(server, state);
 
-  server
-    .get('/', (_req, reply) => {
-      reply.sendFile('index.html');
-    });
+  server.get('/', (_req, reply) => {
+    reply.sendFile('index.html');
+  });
 };

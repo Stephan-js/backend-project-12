@@ -1,9 +1,8 @@
-#! /usr/bin/env node
+#!/usr/bin/env node
 
 import path from 'path';
 import { program } from 'commander';
 import Fastify from 'fastify';
-// eslint-disable-next-line import/extensions
 import plugins from '../src/plugin.js';
 
 const port = process.env.PORT || 5001;
@@ -32,8 +31,7 @@ const start = async () => {
     const preparedServer = await plugins(fastify, appOptions);
     await preparedServer.listen({ port: options.port, host: options.address });
   } catch (err) {
-    console.error(err);
-    process.exit(1);
+    throw new Error(err);
   }
 };
 

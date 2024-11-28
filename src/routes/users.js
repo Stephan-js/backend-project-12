@@ -31,7 +31,10 @@ export default (server, state) => {
     }
 
     const newUser = {
-      id: getId(), username, password, admin: false,
+      id: getId(),
+      username,
+      password,
+      admin: false,
     };
     const token = server.jwt.sign({ userId: newUser.id });
     state.users.push(newUser);
@@ -41,49 +44,61 @@ export default (server, state) => {
       .send({ token });
   });
 
-  server.patch('/api/account/:renUsername', { preValidation: [server.authenticate] }, async (req, reply) => {
-    const user = state.users.find(({ id }) => id === req.user.userId);
-    if (!user) {
-      reply.send(new Unauthorized());
-      return;
-    }
+  server.patch(
+    '/api/account/:renUsername',
+    { preValidation: [server.authenticate] },
+    async (req, reply) => {
+      const user = state.users.find(({ id }) => id === req.user.userId);
+      if (!user) {
+        reply.send(new Unauthorized());
+        return;
+      }
 
-    const { renUsername } = req.params;
-    if (renUsername !== user.username && !user.admin) {
-      reply.send(new Unauthorized());
-      return;
-    }
+      const { renUsername } = req.params;
+      if (renUsername !== user.username && !user.admin) {
+        reply.send(new Unauthorized());
+        return;
+      }
 
-    const newUsername = _.get(req.body, 'username');
-    const userWithThisName = state.users.find(({ username }) => username === newUsername);
-    if (userWithThisName) {
-      reply.send(new Conflict());
-      return;
-    }
+      const newUsername = _.get(req.body, 'username');
+      const userWithThisName = state.users.find(
+        ({ username }) => username === newUsername,
+      );
+      if (userWithThisName) {
+        reply.send(new Conflict());
+        return;
+      }
 
-    const renamedUser = state.users.find(({ username }) => username === renUsername);
-    renamedUser.username = newUsername;
-    reply
-      .header('Content-Type', 'application/json; charset=utf-8')
-      .send({ username: newUsername });
-  });
+      const renamedUser = state.users.find(
+        ({ username }) => username === renUsername,
+      );
+      renamedUser.username = newUsername;
+      reply
+        .header('Content-Type', 'application/json; charset=utf-8')
+        .send({ username: newUsername });
+    },
+  );
 
-  server.delete('/api/account/:deleteUsername', { preValidation: [server.authenticate] }, async (req, reply) => {
-    const user = state.users.find(({ id }) => id === req.user.userId);
-    if (!user) {
-      reply.send(new Unauthorized());
-      return;
-    }
-    const { deleteUsername } = req.params;
+  server.delete(
+    '/api/account/:deleteUsername',
+    { preValidation: [server.authenticate] },
+    async (req, reply) => {
+      const user = state.users.find(({ id }) => id === req.user.userId);
+      if (!user) {
+        reply.send(new Unauthorized());
+        return;
+      }
+      const { deleteUsername } = req.params;
 
-    if (deleteUsername !== user.username && !user.admin) {
-      reply.send(new Unauthorized());
-      return;
-    }
+      if (deleteUsername !== user.username && !user.admin) {
+        reply.send(new Unauthorized());
+        return;
+      }
 
-    _.remove(state.users, ({ username }) => username === deleteUsername);
-    reply
-      .header('Content-Type', 'application/json; charset=utf-8')
-      .send({ username: deleteUsername });
-  });
+      _.remove(state.users, ({ username }) => username === deleteUsername);
+      reply
+        .header('Content-Type', 'application/json; charset=utf-8')
+        .send({ username: deleteUsername });
+    },
+  );
 };

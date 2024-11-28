@@ -1,4 +1,3 @@
-/* eslint-disable import/extensions */
 import fastifySocketIo from 'fastify-socket.io';
 import fastifyStatic from '@fastify/static';
 import fastifyJWT from '@fastify/jwt';
