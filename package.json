@@ -1,18 +1,24 @@
 {
   "name": "chat-app-server",
-  "version": "0.5.8",
-  "description": "",
+  "version": "0.5.9",
+  "description": "Simple backend server for a chat application built with Fastify and Socket.IO.",
   "main": "plugin.js",
   "type": "module",
-  "repository": "https://github.com/Stephan-js/backend-project-12",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Stephan-js/backend-project-12"
+  },
   "bin": {
     "start-server": "./bin/index.js"
   },
   "scripts": {
-    "start": "npx run ./bin/index.js -s ./build"
+    "start": "node ./bin/index.js -s ./build"
   },
   "author": "Stephan",
   "license": "MIT",
+  "engines": {
+    "node": ">=16.0.0"
+  },
   "dependencies": {
     "@fastify/jwt": "^7.2.0",
     "@fastify/static": "^6.10.2",
@@ -36,6 +42,10 @@
   },
   "keywords": [
     "backend",
-    "chat"
+    "chat",
+    "fastify",
+    "socket.io",
+    "real-time",
+    "nodejs"
   ]
 }
