@@ -1,6 +1,7 @@
 # Chat Application Backend Documentation
 
-todo: rewrite documentation
+todo: rewrite documentation and add more details
+
 Simple backend server for a chat application built with Fastify and Socket.IO.
 
 [Frontend Repo Example](https://github.com/Stephan-js/frontend-project-12)
