@@ -290,6 +290,26 @@ socket.on('renameChannel', (payload) => {
 });
 
 ```
+
+🛠️ **Tech Stack**
+
+**Backend**
+
+- **Fastify**: A fast and low-overhead web framework for Node.js, perfect for building high-performance APIs.
+- **fastify-socket.io**: A Fastify plugin that integrates with Socket.IO for real-time communication via WebSockets.
+- **lodash**: A utility library providing helpful methods for working with arrays, objects, and functions, making code more concise and easier to manage.
+- **commander**: A package for building command-line interfaces (CLI) with ease, enabling interaction with Node.js applications through the terminal.
+- **http-errors**: A simple utility for creating HTTP error objects to standardize error handling in APIs.
+- **socket.io**: A library that enables real-time, bi-directional communication between clients and servers via WebSockets.
+
+**Development Tools**
+
+- **ESLint**: A tool for identifying and fixing problems in JavaScript code, helping to maintain code quality and consistency.
+
+## 📝 License
+
+This project is licensed under the **MIT License**, giving you the freedom to use, modify, and distribute the application as needed.
+
 ---
 
 
