@@ -1,12 +1,10 @@
 # Chat Application Backend Documentation
 
-todo: rewrite documentation and add more details
+This is a simple yet powerful backend server for a chat application, built using **Fastify** and **Socket.IO**. It handles user authentication, channel management, and real-time communication with ease.
 
-Simple backend server for a chat application built with Fastify and Socket.IO.
+🔗 **Frontend Example Repository:** [Chat App Frontend](https://github.com/Stephan-js/frontend-project-12)
 
-[Frontend Repo Example](https://github.com/Stephan-js/frontend-project-12)
-
-## Installation
+## 🚀 Installation
 
 To install the necessary package, use the following command:
 
@@ -14,7 +12,7 @@ To install the necessary package, use the following command:
 npm i -s chat-app-server
 ```
 
-## Running the Server
+## 🏃 Running the Server
 
 To start the server, run:
 
@@ -22,7 +20,7 @@ To start the server, run:
 npx start-server
 ```
 
-### Options for start-server
+### 🔧 Options for start-server
 
 
 ```
@@ -40,7 +38,7 @@ Options:
 ```
 
 
-### Rule Settings
+### ⚙️ Rule Settings (`-r` or `--rule`)
 
 The `-r` or `--rule` option accepts a pair of boolean values to configure server behavior. 
 
@@ -52,8 +50,13 @@ The `-r` or `--rule` option accepts a pair of boolean values to configure server
    - `true`: All users can edit their own messages.  
    - `false`: Only admins can edit messages.  
 
+Example:
 
-## User Control
+```bash
+npx start-server -a 127.0.0.1 -p 8080 -r false,true
+```
+
+## 🔑 User Management API
 
 ### 1. Create New User
 **Endpoint:** `POST /api/account/signup`
@@ -109,7 +112,7 @@ axios.patch('/api/account/user', { username: 'newName' }, {
 });
 ```
 
-## Channels
+## 📺 Channel Management API
 
 ### 1. Get Channels
 **Endpoint:** `GET /api/channels`
@@ -171,7 +174,7 @@ axios.delete('/api/channels/3', {
 });
 ```
 
-## Messages
+## 💬 Message Management API
 
 ### 1. Get Messages
 **Endpoint:** `GET /api/messages`
@@ -233,7 +236,7 @@ axios.delete('/api/messages/3', {
 });
 ```
 
-## Socket event subscribes
+## 📡 Socket.IO Event Subscriptions
 
 ### Set up Socket.io
 
