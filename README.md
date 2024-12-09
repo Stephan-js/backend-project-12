@@ -291,7 +291,7 @@ socket.on('renameChannel', (payload) => {
 
 ```
 
-🛠️ **Tech Stack**
+## 🛠️ **Tech Stack**
 
 **Backend**
 
