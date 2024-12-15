@@ -1,7 +1,7 @@
 {
   "name": "chat-app-server",
-  "version": "0.5.9",
-  "description": "Simple backend server for a chat application built with Fastify and Socket.IO.",
+  "version": "0.6.0",
+  "description": "Simple backend server for a chat application built with Fastify and Socket.IO",
   "main": "plugin.js",
   "type": "module",
   "repository": {

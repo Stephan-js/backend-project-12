@@ -1,6 +1,6 @@
 # Chat Application Backend Documentation
 
-Simple backend server for a chat application built with Fastify and Socket.IO.
+Simple backend server for a chat application built with Fastify and Socket.IO
 
 [Frontend Repo Example](https://github.com/Stephan-js/frontend-project-12)
 
