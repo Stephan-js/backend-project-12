@@ -1,10 +1,10 @@
 # Chat Application Backend Documentation
 
-Simple backend server for a chat application built with Fastify and Socket.IO
+This is a simple yet powerful backend server for a chat application, built using **Fastify** and **Socket.IO**. It handles user authentication, channel management, and real-time communication with ease.
 
-[Frontend Repo Example](https://github.com/Stephan-js/frontend-project-12)
+🔗 **Frontend Example Repository:** [Chat App Frontend](https://github.com/Stephan-js/frontend-project-12)
 
-## Installation
+## 🚀 Installation
 
 To install the necessary package, use the following command:
 
@@ -12,7 +12,7 @@ To install the necessary package, use the following command:
 npm i -s chat-app-server
 ```
 
-## Running the Server
+## 🏃 Running the Server
 
 To start the server, run:
 
@@ -20,7 +20,7 @@ To start the server, run:
 npx start-server
 ```
 
-### Options for start-server
+### 🔧 Options for start-server
 
 
 ```
@@ -38,7 +38,7 @@ Options:
 ```
 
 
-### Rule Settings
+### ⚙️ Rule Settings (`-r` or `--rule`)
 
 The `-r` or `--rule` option accepts a pair of boolean values to configure server behavior. 
 
@@ -50,8 +50,13 @@ The `-r` or `--rule` option accepts a pair of boolean values to configure server
    - `true`: All users can edit their own messages.  
    - `false`: Only admins can edit messages.  
 
+Example:
 
-## User Control
+```bash
+npx start-server -a 127.0.0.1 -p 8080 -r false,true
+```
+
+## 🔑 User Management API
 
 ### 1. Create New User
 **Endpoint:** `POST /api/account/signup`
@@ -107,7 +112,7 @@ axios.patch('/api/account/user', { username: 'newName' }, {
 });
 ```
 
-## Channels
+## 📺 Channel Management API
 
 ### 1. Get Channels
 **Endpoint:** `GET /api/channels`
@@ -169,7 +174,7 @@ axios.delete('/api/channels/3', {
 });
 ```
 
-## Messages
+## 💬 Message Management API
 
 ### 1. Get Messages
 **Endpoint:** `GET /api/messages`
@@ -231,7 +236,7 @@ axios.delete('/api/messages/3', {
 });
 ```
 
-## Socket event subscribes
+## 📡 Socket.IO Event Subscriptions
 
 ### Set up Socket.io
 
@@ -285,6 +290,26 @@ socket.on('renameChannel', (payload) => {
 });
 
 ```
+
+## 🛠️ **Tech Stack**
+
+### **Backend**
+
+- **Fastify**: A fast and low-overhead web framework for Node.js, perfect for building high-performance APIs.
+- **fastify-socket.io**: A Fastify plugin that integrates with Socket.IO for real-time communication via WebSockets.
+- **lodash**: A utility library providing helpful methods for working with arrays, objects, and functions, making code more concise and easier to manage.
+- **commander**: A package for building command-line interfaces (CLI) with ease, enabling interaction with Node.js applications through the terminal.
+- **http-errors**: A simple utility for creating HTTP error objects to standardize error handling in APIs.
+- **socket.io**: A library that enables real-time, bi-directional communication between clients and servers via WebSockets.
+
+### **Development Tools**
+
+- **ESLint**: A tool for identifying and fixing problems in JavaScript code, helping to maintain code quality and consistency.
+
+## 📝 License
+
+This project is licensed under the **MIT License**, giving you the freedom to use, modify, and distribute the application as needed.
+
 ---
 
 
