@@ -1,6 +1,6 @@
 # Chat Application Backend Documentation
 
-TODO: make the same, but withd database
+TODO: update
 
 This is a simple yet powerful backend server for a chat application, built using **Fastify** and **Socket.IO**. It handles user authentication, channel management, and real-time communication with ease.
 
